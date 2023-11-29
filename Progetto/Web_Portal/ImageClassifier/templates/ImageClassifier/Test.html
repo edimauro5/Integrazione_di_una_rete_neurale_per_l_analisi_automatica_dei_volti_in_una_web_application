@@ -1,0 +1,137 @@
+{% extends 'ImageClassifier/common.html' %}
+
+{% block content %}
+
+<div id="mc" class="section-title text-center pb-3">
+    <p class="macro bord_text">{{ macro }}</p>
+    <input type="text" hidden value="{{ macro }}" name="macrocategoria">
+</div>
+
+<div class="card my-3" style="background-color: rgba(255, 255, 255, 0); border: 0px;">
+    <form onSubmit="loading()" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div id="p_cont1" class="row g-5 py-5 px-5 catest">
+            <div class="col p-0" id="img_coll">
+                <div id="r_h_cont_id" class="r_h_cont" data-aos="zoom-in" data-aos-delay="100"
+                    style="height: 450px; overflow: auto; margin: 0 auto; border: 2px dotted; border-color:#cdcdcd; ">
+                    <img src="" hidden id="bannerImage"
+                        style="margin: auto; width:100%; height: 100%; object-fit: contain;">
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="700" class="btn-md-4 mt-2 text-center">
+                    <label class="me-0 get-started-btn scrollto" for="{{ form1.image.id_for_label }}" id="new_photo">
+                        <h6 class="my-1">Carica Immagine</h6>
+                    </label></br>
+                    <div style="position: relative; height: 0;">{{ form1.image }}</div>
+                </div>
+            </div>
+
+            <div class="col-md-1 px-2">
+            </div>
+
+            <div class="col p-0">
+                <div id="p_cont2" class="card-body py-0 pe-0 ps-0" data-aos="zoom-in" data-aos-delay="300"
+                    style="padding-top: 0px;">
+                    <div class="col" id="ris">
+
+                        <div class="row">
+                            <div class="col-auto" data-aos="zoom-in" data-aos-delay="500">
+                                <a data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
+                                    aria-expanded="false" aria-controls="multiCollapseExample1"
+                                    onmouseover="this.querySelector('h3').style.color='#ffc451'"
+                                    onmouseout="this.querySelector('h3').style.color='white'">
+                                    <div class="icon-box icon-box-for-test">
+                                        <div>
+                                            <i class="ri-cursor-fill"></i>
+                                            <h3>
+                                                Classifica le categorie
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+
+                            <div class="col ps-1">
+                                <div class="collapse multi-collapse show" id="multiCollapseExample1">
+                                    <div class="scroll_card nsvt" style="overflow-y: auto; overflow-x:hidden;">
+                                        <table class="table table-hover mb-0">
+                                            <tbody>
+                                                <input type=text hidden value="{{macro}}" name="macrocategoria">
+                                                {%for f in form_set%}
+
+                                                <tr>
+                                                    <td class="py-3 px-2">
+                                                        <label for="{{ f.valore_v.id_for_label }}">
+                                                            <h5 class="mb-0 tit titt">{{f.0}}:</h5>
+                                                        </label>
+                                                        <div class="px-3 intest">{{f.1.valore_v}}<div>
+                                                    </td>
+                                                </tr>
+
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col pe-1">
+                                <div class="collapse multi-collapse show" id="multiCollapseExample2">
+                                    <div class="nsvt" style=" overflow-y: auto; overflow-x:hidden;">
+                                        <table class="table table-hover mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="py-3 px-2">
+                                                        <label for="{{ form3.rete_neurale.id_for_label }}">
+                                                            <h5 class="mb-0 tit titt">Rete Neurale:</h5>
+                                                        </label>
+                                                        <div class="px-3 intest">{{form3.rete_neurale}}</div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="py-3 px-2">
+                                                        <label class="trt" for="{{ form3.threshold}">
+                                                            <h5 class="mb-0 tit titt">Threshold:</h5>
+                                                        </label>
+                                                        <div class="px-3 intest">
+                                                            <div class="range-wrap">{{form3.threshold}}
+                                                                <output class="bubble">0.4</output>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto" data-aos="zoom-in" data-aos-delay="700">
+                                <a data-bs-toggle="collapse" href="#multiCollapseExample2" role="button"
+                                    aria-expanded="false" aria-controls="multiCollapseExample2"
+                                    onmouseover="this.querySelector('h3').style.color='#ffc451'"
+                                    onmouseout="this.querySelector('h3').style.color='white'">
+                                    <div class="icon-box icon-box-for-test">
+                                        <div>
+                                            <i class="ri-cursor-fill"></i>
+                                            <h3>
+                                                Definisci la Rete Neurale
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="btn-md-4 mt-2 text-center" data-aos="zoom-in" data-aos-delay="500">
+                            <input type="submit" data-aos="zoom-in" data-aos-delay="500" value="Conferma"
+                                id="Accedibutton" class="space btn space1 text"
+                                style="border-radius:0px !important; font-size: 1.1rem !important;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+</div>
+
+{%endblock%}
